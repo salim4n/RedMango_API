@@ -30,7 +30,7 @@ namespace RedMango_API.Controllers
         public async Task<IActionResult> GetMenuItems()
         {
             _response.Result = _db.MenuItems;
-            _response.StatudCode= HttpStatusCode.OK;
+            _response.StatusCode= HttpStatusCode.OK;
             return Ok(_response);
         }
 
@@ -39,19 +39,19 @@ namespace RedMango_API.Controllers
         {
             if(id == 0)
             {
-                _response.StatudCode= HttpStatusCode.BadRequest;
+                _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
                 return BadRequest(_response);
             }
             MenuItem menuItem = await _db.MenuItems.FirstOrDefaultAsync(mi => mi.Id == id);
             if(menuItem == null)
             {
-                _response.StatudCode = HttpStatusCode.BadRequest;
+                _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
                 return NotFound(_response);
             }
             _response.Result = menuItem;
-            _response.StatudCode = HttpStatusCode.OK;
+            _response.StatusCode = HttpStatusCode.OK;
             return Ok(_response);
         }
 
@@ -80,7 +80,7 @@ namespace RedMango_API.Controllers
                     _db.MenuItems.Add(menuItemToCreate);
                     _db.SaveChanges();
                     _response.Result = menuItemToCreate;
-                    _response.StatudCode = HttpStatusCode.Created;
+                    _response.StatusCode = HttpStatusCode.Created;
                     return CreatedAtRoute("GetMenuItem", new { id = menuItemToCreate.Id }, _response);
                 }
                 else
@@ -134,7 +134,7 @@ namespace RedMango_API.Controllers
                     _db.MenuItems.Update(menuItemDb);
                     _db.SaveChanges();
                     _response.Result = menuItemDb;
-                    _response.StatudCode = HttpStatusCode.NoContent;
+                    _response.StatusCode = HttpStatusCode.NoContent;
                     return Ok(_response);
                 }
                 else
@@ -175,7 +175,7 @@ namespace RedMango_API.Controllers
 
                     _db.MenuItems.Remove(menuItemDb);
                     _db.SaveChanges();
-                    _response.StatudCode = HttpStatusCode.NoContent;
+                    _response.StatusCode = HttpStatusCode.NoContent;
                     return Ok(_response);
 
             }
