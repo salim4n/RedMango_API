@@ -12,6 +12,8 @@ namespace RedMango_API.data
 
         public DbSet<MongoUser> MongoUsers { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<ShoppingCart> MangoShoppingCarts { get; set; }
+        public DbSet<CartItem> MangoCartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
